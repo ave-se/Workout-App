@@ -1,10 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import exercises from '../../assets/data/exercises.json';
 import {Stack} from 'expo-router';
-import { ScrollView } from 'react-native-web';
+import {useState} from 'react';
+
+
+
 export default function ExerciseDetailsScreen() {
   const params = useLocalSearchParams();
+
+
+const [isInstructionExpanded, setIsInstructionExpanded] = useState(false);
+
   const exercise = exercises.find((item) => item.name === params.name); 
 
   if (!exercise) {
@@ -23,7 +30,11 @@ export default function ExerciseDetailsScreen() {
         </Text>
         </View>
         <View style={styles.panel}>
-        <Text style={styles.instructions}>{exercise.instructions}</Text>
+        <Text style={styles.instructions}numberOfLines={isInstructionExpanded ? 0 : 3}>{exercise.instructions}</Text>
+      
+       <Text onPress={ () => setIsInstructionExpanded(!isInstructionExpanded)} style={styles.seeMore}> {isInstructionExpanded ? 'See less' : 'See more'}
+</Text>
+      
       </View>
     </ScrollView>
   );
@@ -32,7 +43,8 @@ export default function ExerciseDetailsScreen() {
 const styles = StyleSheet.create({
     container: {
       padding: 10, 
-    gap: 10,},
+    gap: 10,
+    },
 
   exerciseName: {
     fontSize: 20,
@@ -47,10 +59,17 @@ const styles = StyleSheet.create({
   },
   instructions: {
     fontSize: 16,
-    lineHeight: 22, },
-    panel: {
-      backgroundColor: 'white',
-      padding: 10,
-      borderRadius: 5,
-       }
+    lineHeight: 22,
+  },
+  panel: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 5,
+  },
+  seeMore: {
+    alignSelf: 'center',
+    padding: 5,
+    fontWeight: '600',
+    color: 'gray',
+  }
 });
