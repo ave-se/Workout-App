@@ -20,7 +20,7 @@ export default function ExerciseListItem({item}) {
   
   const styles = StyleSheet.create({
    exerciseContainer: {
-     backgroundColor: 'white',
+     backgroundColor: '#b7410e',
      padding: 10,
      marginBottom: 10,
      borderRadius: 10,
