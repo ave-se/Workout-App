@@ -6,7 +6,7 @@ import {useState} from 'react';
 import { gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import graphqlClient from '../graphqlClient';
-
+import NewSetInput from '../components/NewSetInput';
 
 const exerciseQuery = gql`
   query exercises($name: String) {
@@ -69,7 +69,7 @@ if (isLoading) {
 const styles = StyleSheet.create({
     container: {
       padding: 10, 
-    gap: 10,
+   
     },
 
   exerciseName: {
