@@ -3,6 +3,7 @@ import { gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import graphqlClient from '../graphqlClient';
 
+
 const setsQuery = gql`
   query exercises {
     sets {
@@ -16,10 +17,11 @@ const setsQuery = gql`
   }
 `;
 
-const SetsList = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['sets'],
-    queryFn: () => graphqlClient.request(setsQuery),
+const SetsList = ({ ListHeaderComponent, exerciseName }) => {
+const { data, isLoading } = useQuery({
+    queryKey: ['sets', exerciseName],
+    queryFn: () =>
+      graphqlClient.request(setsQuery, { exercise: exerciseName }),
   });
 
   if (isLoading) {
@@ -29,21 +31,30 @@ const SetsList = () => {
   return (
     <FlatList
       data={data.sets.documents}
-      renderItem={({ item }) => (
-        <Text
-          style={{
-            backgroundColor: 'pink',
-            marginVertical: 5,
-            padding: 10,
-            borderRadius: 5,
-            overflow: 'hidden',
-          }}
-        >
-          {item.reps} x {item.weight}
-        </Text>
+      ListHeaderComponent={() => (
+        <>
+          <ListHeaderComponent />
+         
+        </>
       )}
-    />
-  );
-};
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) => (
+        <Text 
+        style= {
+         {
+           backgroundColor: 'pink',
+           marginVertical: 5,
+           padding: 10,
+           borderRadius: 5,
+        
+         }
+     
+       }>
+       </Text>    
+     )}
+   />
+ );
+       }
+    
 
 export default SetsList;
