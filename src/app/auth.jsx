@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { Redirect, Stack } from 'expo-router';
 import { useState } from 'react';
 import { useAuth } from '../providers/AuthContext';
@@ -17,7 +17,7 @@ const AuthScreen = () => {
 
   return (
     <View style={styles.page}>
-      <Stack.Screen options={{ title: 'Sign in' }} />
+      <Stack.Screen options={{ title: 'Workout App ' }} />
 
       <Text style={styles.label}>Username</Text>
       <TextInput
@@ -26,7 +26,9 @@ const AuthScreen = () => {
         placeholder="Username"
         style={styles.input}
       />
-      <Button title="Sign in" onPress={onSignIn} />
+   <Pressable onPress={onSignIn} style={styles.button}>
+      <Text style={styles.buttonText}>Sign In</Text>
+    </Pressable>
     </View>
   );
 };
@@ -42,13 +44,26 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: '600',
     fontSize: 20,
-    color: 'dimgray',
+    color: 'pink',
   },
   input: {
     borderWidth: 1,
     borderColor: 'gainsboro',
     padding: 10,
     borderRadius: 5,
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    alignSelf: 'center', // Add this line
+    width: 100, // Or specify a fixed width
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
   },
 });
 
