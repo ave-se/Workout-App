@@ -10,7 +10,7 @@ type Root {
 }
 
 type Query {
-  sets: Root
+  sets(exercise: String!, username: String!): Root
     @rest(
       method: POST
       endpoint: "https://eu-central-1.aws.data.mongodb-api.com/app/data-jnhfe/endpoint/data/v1/action/find"
@@ -18,14 +18,18 @@ type Query {
       { name: "access-control-request-headers", value: "*" }
 {
           name: "api-key"
-          value: "M8HYlZla8fKGcpFdTv7yXmd1MCPVOPZABIEOUIONu3AG0xmwHKhWfo54XCFbb32O"
+          value: "9IUovZ6IhBOzWukZZPaKHO9KEU8TjdKploXzyE1BRUww8yRlW9trlqzI3eCNRzHk"
         }
       ]
       postbody: """
       {
         "collection": "sets",
         "dataSource": "Cluster0",
-        "database": "workouts"
+        "database": "workouts",
+        "filter": {
+          "exercise": "{{ .Get "exercise" }}",
+          "username": "{{ .Get "username" }}"
+        }
       }
       """
     )

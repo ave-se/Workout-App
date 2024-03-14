@@ -3,14 +3,15 @@ type InsertSetResponse {
 }
 
 input NewSet {
-exercise: String!
-reps: Int!
-weight: Float
+  username: String!
+  exercise: String!
+  reps: Int!
+  weight: Float
 }
 
 type Mutation {
    insertSet(
-    document: NewSet!
+    document: NewSet 
     collection: String!
     dataSource: String!
     database: String!
@@ -20,9 +21,9 @@ type Mutation {
       endpoint: "https://eu-central-1.aws.data.mongodb-api.com/app/data-jnhfe/endpoint/data/v1/action/insertOne"
       headers: [
         { name: "accept", value: "application/json" }
-        {
-          name: "apikey"
-          value: "M8HYlZla8fKGcpFdTv7yXmd1MCPVOPZABIEOUIONu3AG0xmwHKhWfo54XCFbb32O"
+        { name: "access-control-request-headers", value: "*" }
+        {  name: "apikey"
+          value: "9IUovZ6IhBOzWukZZPaKHO9KEU8TjdKploXzyE1BRUww8yRlW9trlqzI3eCNRzHk"
           }
       ]
       # postbody: """
