@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { useState } from 'react';
 import { gql } from 'graphql-request';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -43,7 +43,7 @@ const NewSetInput = ({ exerciseName }) => {
     if (Number.parseFloat(weight)) {
       newSet.weight = Number.parseFloat(weight);
     }
-    mutate(newSet);
+    // mutate(newSet);
   };
 
   console.log(error);
@@ -65,9 +65,7 @@ const NewSetInput = ({ exerciseName }) => {
           style={styles.input}
           keyboardType="numeric"
         />
-      <Pressable style={styles.button} onPress={addSet}>
-  <Text style={styles.buttonText}>{isPending ? 'Adding...' : 'Add'}</Text>
-</Pressable>
+       <Button title={isPending ? 'Adding...' : 'Add'} onPress={addSet} />
       </View>
       {isError && <Text style={{ color: 'red' }}>Failed to add the set</Text>}
     </View>
